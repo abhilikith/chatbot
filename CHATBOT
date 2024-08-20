@@ -1,0 +1,47 @@
+positive_rules = {
+    "hello": "Hi there! How can I help you?",
+    "hi": "Hello! What can I do for you today?",
+    "how are you": "I'm just a program, so I don't have feelings, but thanks for asking!",
+    "what's your name": "I'm a chatbot created to assist you. I don't have a specific name yet.",
+    "default": "I'm sorry, I don't understand that. Could you please rephrase?"
+}
+
+negative_rules = {
+    "bye": "It seems like you're not happy. Let's end this conversation. Goodbye!",
+    "no": "There's no need for negativity. Goodbye!",
+    "hate": "I’m sorry to hear that. It’s time to say goodbye!",
+    "exit": "Goodbye!"
+}
+
+
+def get_response(user_input):
+    
+    user_input = user_input.lower()
+    
+  
+    for key in negative_rules:
+        if key in user_input:
+            return negative_rules[key], True
+    
+    
+    for key in positive_rules:
+        if key in user_input:
+            return positive_rules[key], False
+    
+    
+    return positive_rules["default"], False
+
+
+def chatbot():
+    print("Chatbot: Hi! Type 'exit' to end the conversation.")
+    while True:
+        user_input = input("You: ")
+        
+        response, is_negative = get_response(user_input)
+        print(f"Chatbot: {response}")
+        
+        if is_negative:
+            break
+
+
+chatbot()
